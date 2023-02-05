@@ -16,21 +16,36 @@ class TodoPage extends StatefulWidget {
 
 class _TodoPage extends State<TodoPage> {
   var showGrid = true; // Set to false to show ListView
-
+  final controller = ScrollController();
+  var itemCount = 20;
   @override
   void initState() {
     // TODO: implement initState
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<TodoProvider>(context, listen: false).getAllTodos();
     });
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        showMoreData();
+      }
+    });
     super.initState();
+  }
+
+  void showMoreData() {
+    setState(() {
+      itemCount = itemCount + 20;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return scalfold(
       Consumer<TodoProvider>(builder: (context, value, child) {
-        final universidades = value.universidad;
+        List<Universidad> universidades = [];
+        if (value.universidades.length > 1) {
+          universidades = value.universidades.sublist(0, itemCount);
+        }
         return showGrid ? _buildGrid(universidades) : _buildList(universidades);
       }),
       AppBar(
@@ -78,24 +93,32 @@ class _TodoPage extends State<TodoPage> {
                 ),
               ));
 
-  Widget _buildList(universidades) => ListView.builder(
-      itemCount: universidades.length,
+  Widget _buildList(List<Universidad> universidades) => ListView.builder(
+      controller: controller,
+      itemCount: universidades.length + 1,
       itemBuilder: (context, index) {
-        final Universidad universidad = universidades[index];
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    UniversidadDetail(universidad: universidad),
-              ),
-            );
-          },
-          child: Container(
-              child: ListTile(
-            title: Text(universidad.name),
-          )),
-        );
+        if (index < universidades.length) {
+          final Universidad universidad = universidades[index];
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      UniversidadDetail(universidad: universidad),
+                ),
+              );
+            },
+            child: Container(
+                child: ListTile(
+              title: Text(universidad.name),
+            )),
+          );
+        } else {
+          return const Padding(
+            padding: EdgeInsets.all(16),
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
       });
 }

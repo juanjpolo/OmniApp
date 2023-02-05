@@ -8,15 +8,15 @@ class TodoProvider extends ChangeNotifier {
   final _service = TodoService();
   bool isLoading = false;
   int _numeroEstudiantes = 0;
-  List<Universidad> _universidad = [];
-  List<Universidad> get universidad => _universidad;
+  List<Universidad> _universidades = [];
+  List<Universidad> get universidades => _universidades;
   int get numeroEstudiantes => _numeroEstudiantes;
 
   Future<void> getAllTodos() async {
     isLoading = true;
     notifyListeners();
     final response = await _service.getAll();
-    _universidad = response;
+    _universidades = response;
     isLoading = false;
     notifyListeners();
   }

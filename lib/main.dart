@@ -1,4 +1,3 @@
-import 'package:entrando_en_ambiente/src/class/data_class.dart';
 import 'package:entrando_en_ambiente/src/providers/todo_provider.dart';
 import 'package:entrando_en_ambiente/src/screens/TodoPage.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +16,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<DataClass>(
-          create: (_) {
-            return DataClass();
-          },
-        ),
         ChangeNotifierProvider<TodoProvider>(
           create: (_) {
             return TodoProvider();
