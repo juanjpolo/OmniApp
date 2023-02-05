@@ -132,11 +132,11 @@ class _UniversidadDetailState extends State<UniversidadDetail> {
             actions: <Widget>[
               TextButton(
                 onPressed: () => {pickImageC()},
-                child: const Text('Cámara'),
+                child: const Text('Camara'),
               ),
               TextButton(
                 onPressed: () => {pickImage()},
-                child: const Text('Galería'),
+                child: const Text('Galeria'),
               ),
             ],
           ),

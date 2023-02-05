@@ -14,14 +14,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<TodoProvider>(
-          create: (_) {
-            return TodoProvider();
-          },
-        )
-      ],
+    return ChangeNotifierProvider<TodoProvider>(
+      create: (_) => TodoProvider(),
       child: GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
