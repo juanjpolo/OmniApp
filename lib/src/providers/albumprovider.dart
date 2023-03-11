@@ -9,7 +9,9 @@ enum ProductState { initial, loading, loaded, empty, error }
 class AlbumProvider extends ChangeNotifier {
   final _service = ApiServices();
   int _itemCount = 10;
+  List<Album> _albumsAux = [];
   List<Album> _albums = [];
+
   List<Album> get albums => _albums;
   int get itemCount => _itemCount;
   AppException _appException = AppException("", "", 200);
@@ -24,7 +26,9 @@ class AlbumProvider extends ChangeNotifier {
       _setState(ProductState.loading);
 
       final List<Album> response = await _service.getAll();
+      _albumsAux = response;
       _albums = response.sublist(0, itemCount);
+
       _setState(ProductState.loaded);
 
       notifyListeners();
@@ -42,7 +46,8 @@ class AlbumProvider extends ChangeNotifier {
 
   void pagination() {
     _itemCount = itemCount + 10;
-    _albums.sublist(0, itemCount);
+    _albumsAux.sublist(0, itemCount);
+    _albums = _albumsAux;
     notifyListeners();
   }
 
