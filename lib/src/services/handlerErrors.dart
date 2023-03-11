@@ -12,7 +12,6 @@ class AppException implements Exception {
   int get code => _code;
   String get message => _message;
   String get prefix => _prefix;
-  
 }
 
 class FetchDataException extends AppException {
@@ -33,7 +32,8 @@ class NotFoundException extends AppException {
 }
 
 class InternalServerException extends AppException {
-  InternalServerException([message]) : super(message, "Internal Server Error: ", 500);
+  InternalServerException([message])
+      : super(message, "Internal Server Error: ", 500);
 }
 
 class InvalidInputException extends AppException {

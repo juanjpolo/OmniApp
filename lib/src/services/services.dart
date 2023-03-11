@@ -7,7 +7,6 @@ import '../helpers/services_errors_helper.dart';
 import 'handlerErrors.dart';
 
 class ApiServices {
-
   Future<List<Album>> getAll() async {
     List<Album> albumInfo;
 

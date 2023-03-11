@@ -43,7 +43,7 @@ class AlbumProvider extends ChangeNotifier {
   void pagination() {
     _itemCount = itemCount + 10;
     _albums.sublist(0, itemCount);
-     notifyListeners();
+    notifyListeners();
   }
 
   AppException get failure => _appException;
