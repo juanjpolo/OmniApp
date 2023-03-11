@@ -39,7 +39,7 @@ class _TodoPage extends State<HomePage> {
       backgroundColor: const Color.fromRGBO(231, 232, 244, 1),
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Omni"),
+        title: const Text("Omni.Pro"),
       ),
       body: Consumer<AlbumProvider>(builder: (context, albumProvider, child) {
         switch (albumProvider.state) {
@@ -56,7 +56,7 @@ class _TodoPage extends State<HomePage> {
               img: 'assets/apierrorImage.webp',
               title: albumProvider.failure.prefix,
               message: albumProvider.failure.message,
-              buttonText: 'Inténtalo de nuevo',
+              buttonText: 'Try Again',
               onPressed: () => albumProvider.getAllTodos(),
               heightMultiplier: 0.35,
             );
