@@ -1,5 +1,3 @@
-# Prueba técnica
-
 A new Flutter project.
 
 ## Getting Started
